@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+let word = prompt("Enter word:");
+
+let first = word.indexOf("a");
+let last = word.lastIndexOf("a");
+
+if (first == -1)
+    alert("No 'a' found");
+else {
+    let between = word.substring(first + 1, last);
+    alert("First: " + (first + 1) +
+          "\nLast: " + (last + 1) +
+          "\nBetween: " + between);
+}
+</script>
+
+</html>

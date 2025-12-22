@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<input type="checkbox" class="roll" value="101">101<br>
+<input type="checkbox" class="roll" value="102">102<br>
+<input type="checkbox" class="roll" value="103">103<br>
+
+<p id="output"></p>
+
+<script>
+let boxes = document.getElementsByClassName("roll");
+let output = document.getElementById("output");
+
+for (let box of boxes) {
+
+    box.onclick = function () {
+
+        let selected = "";
+
+        for (let b of boxes) {
+            if (b.checked) {
+                selected += b.value + ", ";
+            }
+        }
+
+        output.textContent = selected;
+    };
+}
+</script>
+
+</body>
+</html>

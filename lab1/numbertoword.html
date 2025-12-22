@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+let n = prompt("Enter number (0-999):");
+
+if (isNaN(n)) {
+    alert("not a number");
+} else {
+    n = Number(n);
+
+    if (n < 0 || n > 999) {
+        alert("out of range");
+    } else {
+        const ones = ["zero","one","two","three","four","five","six","seven","eight","nine"];
+        const teens = ["ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+        const tens = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+
+        let words = "";
+
+        if (n < 10) {
+            words = ones[n];
+        }
+        else if (n < 20) {
+            words = teens[n - 10];
+        }
+        else if (n < 100) {
+            words = tens[Math.floor(n / 10)] + " " + ones[n % 10];
+        }
+        else {
+            let hundred = Math.floor(n / 100);
+            let rem = n % 100;
+
+            words = ones[hundred] + " hundred";
+
+            if (rem > 0) {
+                if (rem < 10) words += " " + ones[rem];
+                else if (rem < 20) words += " " + teens[rem - 10];
+                else words += " " + tens[Math.floor(rem / 10)] + " " + ones[rem % 10];
+            }
+        }
+
+        alert(words.trim());
+    }
+}
+</script>
+
+</html>

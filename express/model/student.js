@@ -6,4 +6,4 @@ const schema ={
     studentAge:Number,
 }
 
-module.exports = mongoose.model("Student",schema)
+module.exports = mongoose.model("students",schema)

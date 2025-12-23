@@ -1,7 +1,7 @@
 const express = require("express")
 const mongoose = require('mongoose')
 const student = require('./model/student')
-const bodyParser = require('body-parser')
+
 
 
 const databaseurl="mongodb+srv://Parth:123@cluster0.fedxf.mongodb.net/express"
@@ -12,21 +12,22 @@ mongoose.connect(databaseurl).then(()=>{
 
 const app =express();
 
-app.use(bodyParser.json())
+app.use(express.json())
 
 
 //getall
 
 app.get('/students',async (req,res)=>{
     const data = await student.find();
-    res.send(data);
+    //return res.status(200).json({message:"successfully fetched"})
+     res.send(data);
 })
 
 
 //getbyid
 
 app.get('/students/:id',async (req,res)=>{
-    const data = await student.findById({_id:req.params.id});
+    const data = await student.findById(req.params.id);
     res.send(data)
 })
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 cd your/project
 git init
 
@@ -9,4 +10,17 @@ git commit -m "initial commit"
 
 git remote add origin https://github.com/<username>/<repo>.git
 git branch -M main
+=======
+cd your/project
+git init
+
+git config --global user.name "Your Name"
+git config --global user.email "youremail@example.com"
+
+git add .
+git commit -m "initial commit"
+
+git remote add origin https://github.com/<username>/<repo>.git
+git branch -M main
+>>>>>>> 69668ccec09818d1f3b7bdd160f28ea9b40e8817
 git push -u origin main

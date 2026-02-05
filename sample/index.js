@@ -4,14 +4,29 @@ const mongoose=require('mongoose')
 const User = require('./models/user')
 const app=express()
 app.use(express.json())
-
+const jwt = require('jsonwebtoken')
 mongoose.connect(process.env.mongourl).then(()=>{
     console.log("DB connected");
 }).catch((err)=>{
     console.log(err);
 })
 
+const generateToken=(userId)=>{
+    jwt.sign({_id:userId},process.env.secret,{expiresIn:'1h'})
+}
 
+
+app.post('/login',async(req,res)=>{
+    const {email,password}=req.body;
+    
+    const user = await User.findOne({email})
+
+    if(!user){
+        return res.json({message:"user not found"})
+    }
+
+    const isPasswordValid=await bcrypt.comapre(password,user.password)
+})
 app.get('/user',async(req,res)=>{
     try{
     const user = await User.find();
@@ -28,7 +43,7 @@ app.get('/user/:id',async(req,res)=>{
     const user = await User.findById(req.params.id);
 
     if(!user){
-        res.status(404).json({message:"user not found"})
+        return res.status(404).json({message:"user not found"})
     }
     res.json({message:"successfully fetched",OneUser:user})
 
@@ -47,12 +62,14 @@ app.post('/register',async(req,res)=>{
         password,
         phone
     })
-    res.json({message:"successfully registered user",createdUSer:user})
+    res.json({message:"successfully registered user",createdUser:user})
     }
    catch(err){
     res.json({err})
    }
 })
+
+
 
 app.patch('/update/:id',async(req,res)=>{
     try{
@@ -76,7 +93,7 @@ app.delete('/delete/:id',async(req,res)=>{
     try{
         const user = await User.findByIdAndDelete(req.params.id);
         if(!user){
-        res.status(404).json({message:"user not found"})
+      return  res.status(404).json({message:"user not found"})
     }
         res.json({message:"successfully deleted",deletedUser:user})
     }

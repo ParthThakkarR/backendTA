@@ -69,7 +69,7 @@ app.post('/login',async(req,res)=>{
     {
     return res.json({message:"invaid credentials"})
     }
-    const token=await generateToken(User.id)
+    const token=await generateToken(user._id)
     res.json({message:"user login successfully",token:token})
 }
 catch(err){

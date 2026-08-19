@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { students } from "../data";
+
 export function GET(request:NextRequest){
     return NextResponse.json(students)
 }

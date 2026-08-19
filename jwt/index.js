@@ -16,7 +16,7 @@ mongoose.connect(process.env.mongourl).then(()=>{
     
 })
 const generateToken=(userId)=>{
-    return jwt.sign({id:userId},process.env.secret,{expiresIn:'1h'});
+    return jwt.sign({id:userId},process.env.secretKey,{expiresIn:'1h'});
 }
     
 const verfiyToken=(req,res,next)=>{
@@ -64,12 +64,18 @@ app.post('/login',async(req,res)=>{
         if(!user){
             return res.json({message:"user not found"})
         }
+        console.log(user);
+        
         const isPasswordValid=await bcrypt.compare(password,user.password)
         if(!isPasswordValid)
     {
     return res.json({message:"invaid credentials"})
     }
-    const token=await generateToken(User.id)
+    console.log("here");
+    
+    const token=await generateToken(user._id)
+    console.log(token);
+    
     res.json({message:"user login successfully",token:token})
 }
 catch(err){

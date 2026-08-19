@@ -76,6 +76,7 @@ app.post('/login',async(req,res)=>{
     const token=await generateToken(user._id)
     console.log(token);
     
+    const token=await generateToken(user._id)
     res.json({message:"user login successfully",token:token})
 }
 catch(err){
